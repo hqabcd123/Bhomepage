@@ -3,13 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <title>report</title>
+    <link rel="stylesheet" href={% static "./css/reportform.css" %}>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src={% static "./js/report_form.js" %}></script>
   </head>
   <body>
     <form method="post"id="form" enctype="multipart/form-data">
       {%csrf_token %}
-      <input type="text" name="name">
+      <a>担当者名：</a><input type="text" name="name">
+      <br>
+      <a>お客様名：</a><input type="text" name="customer-name">
       <ol id="statement">
         <li type="1">
           <input type="checkbox" name="statement-0"><input type="text" name="data">
