@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>report</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src={% static "./js/report_form.js" %}></script>
+  </head>
+  <body>
+    <form method="post"id="form" enctype="multipart/form-data">
+      {%csrf_token %}
+      <input type="text" name="name">
+      <ol id="statement">
+        <li type="1">
+          <input type="checkbox" name="statement-0"><input type="text" name="data">
+        </li>
+      </ol>
+      <input id="insert-button" type="button" value="insert">
+      <input type="submit" value="submit" ></input>
+    </form>
+  </body>
+</html>
