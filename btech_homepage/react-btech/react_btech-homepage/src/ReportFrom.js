@@ -1,6 +1,7 @@
 import NavScrollExample from './Component/js/Bootstramp';
 import './Component/css/ReportForm.css';
 import { useEffect, useState } from 'react';
+import Draggable from 'react-draggable';
 
 function ChangePosition(e){
     console.log('hello');
@@ -34,16 +35,18 @@ const Cap = () => {
     };
 
     return(
-        <div 
-            style={Style}
-            onMouseDown={(e) => handleClickEvent(e)}
-        >
-            <p 
-                className=' text-red-500 text-4xl font-bold text-right'
+        <Draggable>
+            <div 
                 style={Style}
-                // onClick={(e) => handleClickEvent(e)}
-            >CONFIDENTIAL</p>
-        </div>
+                onMouseDown={(e) => handleClickEvent(e)}
+            >
+                <p 
+                    className=' text-red-500 text-4xl font-bold text-right'
+                    style={Style}
+                    // onClick={(e) => handleClickEvent(e)}
+                >CONFIDENTIAL</p>
+            </div>
+        </Draggable>
     );
 }
 
