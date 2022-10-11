@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import '../css/ImageUpload.css';
 
 
@@ -16,6 +16,7 @@ function FileUploadUI() {
     const data = new FormData();
     file.map((image) => {
         data.append("images[]", image);
+        return null;
     });
 
     const handleChangeEvent = (e) => {

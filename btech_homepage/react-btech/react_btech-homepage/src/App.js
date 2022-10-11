@@ -2,7 +2,8 @@ import './App.css';
 import React, {useEffect, useState} from 'react';
 import FileUploadUI from './Component/js/ImageUpload';
 import NavScrollExample from './Component/js/Bootstramp';
-
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import ReportForm from './ReportFrom';
 
 function StatementForm() {
   let count = 0;
@@ -83,23 +84,44 @@ function StatementForm() {
 const Command = () => {
   return(
     <div className='Command'>
-    <a>コメント：</a>
+    <p>コメント：</p>
       <textarea name="command" id="" cols="20" rows="5"></textarea>
     </div>
   );
 }
 
+function Main(){
+
+  const navigate = useNavigate();
+
+  return(
+    <div >
+        <NavScrollExample></NavScrollExample>
+        <StatementForm></StatementForm>
+        <FileUploadUI></FileUploadUI>
+        <Command></Command>
+        <button onClick={() => navigate('/reportForm')}>レポート作成</button>
+    </div>
+  );
+}
 
 function App() {
   useEffect(() => {
     document.title = "report"
-  });
+  }, []);
+
   return (
     <div className="App">
-      <NavScrollExample></NavScrollExample>
-      <StatementForm></StatementForm>
-      <FileUploadUI></FileUploadUI>
-      <Command></Command>
+      <BrowserRouter>
+        <Routes>
+          <Route 
+            path='/' element={<Main></Main>}
+          />
+          <Route 
+            path='/reportForm' element={<ReportForm></ReportForm>}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
