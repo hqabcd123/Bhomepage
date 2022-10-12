@@ -42,50 +42,58 @@ function StatementForm() {
   }
 
   return (
-    <div className='State-form'>
-      <form method="post">
-      {inputfield.map((form, index) => {
-          return (
-            <div key={index}>
-              <input type="checkbox"
-                name="check"
-                onChange={e => handleChangeEvent(e, index)}
-              />
-              <input
-                name='air'
-                placeholder='air'
-                onChange={e => handleChangeEvent(e, index)}
-                value={form.air}
-              />
-              <input
-                name='suray'
-                placeholder='suray'
-                onChange={e => handleChangeEvent(e, index)}
-                value={form.suray}
-              />
-              <input
-                name='pump'
-                placeholder='pump'
-                onChange={e => handleChangeEvent(e, index)}
-                value={form.pump}
-              />
-              <button type='button' onClick={() => handleRemoveEvent(index)}>Remove</button>
-            </div>
-          )
-        })}
-        <button type='button' onClick={handleOnClickEvent}>insert</button>
-        <br />
-        <input type="submit" value="submit" />
-      </form>
+    <div>
+      <div className='State-form grid grid-cols-1 gap-y-2'>
+        {inputfield.map((form, index) => {
+            return (
+              <div key={index} className=" grid grid-cols-7" >
+                <span className=' basis-1 '>レポートに載せますか？</span>
+                <input type="checkbox"
+                  name="check"
+                  className=' basis-1 '
+                  onChange={e => handleChangeEvent(e, index)}
+                />
+                <span className=' basis-1 ' >条件データ:</span>
+                <input
+                  name='air'
+                  className=' border-2 border-black '
+                  placeholder='air'
+                  onChange={e => handleChangeEvent(e, index)}
+                  value={form.air}
+                />
+                <input
+                  name='suray'
+                  className=' border-2 border-black '
+                  placeholder='suray'
+                  onChange={e => handleChangeEvent(e, index)}
+                  value={form.suray}
+                />
+                <input
+                  name='pump'
+                  className=' border-2 border-black '
+                  placeholder='pump'
+                  onChange={e => handleChangeEvent(e, index)}
+                  value={form.pump}
+                />
+                <button type='button' onClick={() => handleRemoveEvent(index)}>Remove</button>
+              </div>
+            )
+          })}
+      </div>
+      <button type='button' onClick={handleOnClickEvent}>insert</button>
     </div>
   );
 }
 
 const Command = () => {
   return(
-    <div className=' text-lg '>
-    <p>コメント：</p>
-      <textarea name="command" id="" cols="20" rows="5"></textarea>
+    <div >
+    <p className=' text-lg '>コメント：</p>
+      <textarea name="command" id="" className='
+        w-full text-base
+        border-2 border-soild border-black
+        ease-in-out
+      ' ></textarea>
     </div>
   );
 }
@@ -96,10 +104,12 @@ function Main(){
 
   return(
     <div >
+      <form action="" method="post">
         <StatementForm></StatementForm>
         <FileUploadUI></FileUploadUI>
         <Command></Command>
         <button onClick={() => navigate('/reportForm')}>レポート作成</button>
+      </form>
     </div>
   );
 }
