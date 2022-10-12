@@ -40,7 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'btech_searchengine',
     'btech_reportform',
+    'rest_framework',
+    'rest_framework.authtoken',    # DRFトークン認証用のライブラリ
+	'corsheaders',                 # django外部のwhitelist管理ライブラリ
 ]
+
+REST_FRAMEWORK = { #これも追加
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+		'rest_framework.authentication.TokenAuthentication',    # トークン認証
+	],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'btech_homepage.urls'
@@ -132,3 +142,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = "/Media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
+
+# CORS_ORIGIN_WHITELIST = [
+# 	'http://localhost:3000'        # Reactの開発サーバーのデフォルトIPアドレスを追加
+# ]
+CORS_ORIGIN_ALLOW_ALL = True
