@@ -37,19 +37,31 @@ function FileUploadUI() {
 
     return (
         <div>
-            <h3>Add image: </h3>
-            <input type="file"
-                multiple
-                accept="image/*,.png,.jpg,.jpeg,.gif"
-                onChange={handleChangeEvent}
-            />
-            {file.map((image, index) => {
-                return (
-                    <div id="image" key={index}>
-                        <img className={converseCol(index)} src={URL.createObjectURL(image)} alt=""/>
-                    </div>
-                );
-            })}
+            <div className=" object-cover h-48 w-96 ">
+                <h3 className=" text-lg ">写真をアップロード: </h3>
+                <input type="file"
+                    className="
+                    block w-full text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-none 
+                    file:text-base file:font-semibold
+                    file:bg-violet-50 file:text-violet-700
+                    hover:file:bg-violet-100
+                    "
+                    multiple
+                    accept="image/*,.png,.jpg,.jpeg,.gif"
+                    onChange={handleChangeEvent}
+                />
+            </div>
+            <div className=" grid grid-cols-4 gap-4 ">
+                {file.map((image, index) => {
+                    return (
+                        <div id="image" key={index}>
+                            <img className={converseCol(index)} src={URL.createObjectURL(image)} alt=""/>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

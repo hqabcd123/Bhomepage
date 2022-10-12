@@ -1,4 +1,3 @@
-import NavScrollExample from './Component/js/Bootstramp';
 import './Component/css/ReportForm.css';
 import Draggable from 'react-draggable';
 import { useState } from 'react';
@@ -46,7 +45,7 @@ function ReportForm() {
 
     return (
         <div>
-            <NavScrollExample></NavScrollExample>
+            {/* <NavScrollExample></NavScrollExample> */}
             <RedHeader name="CONFIDENTIAL"></RedHeader>
             ReportForm
         </div>

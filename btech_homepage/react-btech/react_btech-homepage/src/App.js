@@ -83,7 +83,7 @@ function StatementForm() {
 
 const Command = () => {
   return(
-    <div className='Command'>
+    <div className=' text-lg '>
     <p>コメント：</p>
       <textarea name="command" id="" cols="20" rows="5"></textarea>
     </div>
@@ -96,7 +96,6 @@ function Main(){
 
   return(
     <div >
-        <NavScrollExample></NavScrollExample>
         <StatementForm></StatementForm>
         <FileUploadUI></FileUploadUI>
         <Command></Command>
@@ -112,7 +111,9 @@ function App() {
 
   return (
     <div className="App">
+      
       <BrowserRouter>
+        <NavScrollExample></NavScrollExample>
         <Routes>
           <Route 
             path='/' element={<Main></Main>}
