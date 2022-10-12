@@ -102,6 +102,19 @@ function Main(){
 
   const navigate = useNavigate();
 
+  const toJson = async (res) => {
+    const json = await res.json();
+    console.log(json);
+    return json;
+  }
+
+  const handleAPIEvent = async () => {
+    const res = await fetch('http://localhost:8000/report/react/', {
+      method: 'GET',
+    })
+    return await toJson(res);
+  }
+
   return(
     <div >
       <form action="" method="post">
@@ -110,6 +123,7 @@ function Main(){
         <Command></Command>
         <button onClick={() => navigate('/reportForm')}>レポート作成</button>
       </form>
+      <button onClick={handleAPIEvent} >Here</button>
     </div>
   );
 }
@@ -130,6 +144,9 @@ function App() {
           />
           <Route 
             path='/reportForm' element={<ReportForm></ReportForm>}
+          />
+          <Route
+            path='*' element={ <div>404 NOT FOUND</div> }
           />
         </Routes>
       </BrowserRouter>
