@@ -1,50 +1,41 @@
 import NavScrollExample from './Component/js/Bootstramp';
 import './Component/css/ReportForm.css';
-import { useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+import { useState } from 'react';
 
-function ChangePosition(e){
-    console.log('hello');
-    let x = e.target.offsetLeft;
-    let y = e.target.offsetTop;
+//https://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
+//useful source code for develop own draggable elemnt
 
-    let coords = {
-        x: e.clintX - e.target.offsetLeft,
-        y: e.clintY - e.target.offsetTop,
+
+const RedHeader = (props) => {
+
+    let [DetalPosition, setDetalPosition] = useState({
+        x: 0,
+        y: 0,
+    });
+
+    const handleDrag = (e, ui) => {
+        let x = DetalPosition.x + ui.deltaX;
+        let y = DetalPosition.y + ui.deltaY;
+        console.log(DetalPosition.x);
+        setDetalPosition({
+            x: x,
+            y: y,
+        });
     }
 
-    return coords;
-}
-
-
-const Cap = () => {
-
-    let [Style, setStyle] = useState({
-        position: 'relative',
-        right: '0px',
-        top: '0px'
-    })
-
-    const handleClickEvent = (e) => {
-        let newStyle = {...Style};
-        console.log(newStyle);
-        let temp = ChangePosition(e);
-        console.log('temp: ' + temp.x);
-        newStyle['right'] = temp.x + 'px';
-        setStyle(newStyle)
-    };
-
     return(
-        <Draggable>
-            <div 
-                style={Style}
-                onMouseDown={(e) => handleClickEvent(e)}
-            >
+        <Draggable 
+            onDrag={(e, ui) => handleDrag(e, ui)}
+            position={null}
+        >
+            <div >
                 <p 
                     className=' text-red-500 text-4xl font-bold text-right'
-                    style={Style}
                     // onClick={(e) => handleClickEvent(e)}
-                >CONFIDENTIAL</p>
+                >{props.name}</p>
+                <br />
+                <p className=' text-right'>x: {DetalPosition.x}, y: {DetalPosition.y} </p>
             </div>
         </Draggable>
     );
@@ -56,7 +47,7 @@ function ReportForm() {
     return (
         <div>
             <NavScrollExample></NavScrollExample>
-            <Cap></Cap>
+            <RedHeader name="CONFIDENTIAL"></RedHeader>
             ReportForm
         </div>
 
