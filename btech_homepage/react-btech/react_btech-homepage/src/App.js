@@ -4,24 +4,28 @@ import FileUploadUI from './Component/js/ImageUpload';
 import NavScrollExample from './Component/js/Bootstramp';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import ReportForm from './ReportFrom';
+//import axios from "./axios";
+
+const CustomerName = (props) => {
+  return (
+    <div>
+      <p className=' text-xl '>お客先名：{props.name}</p>
+    </div>
+  );
+}
 
 function StatementForm() {
-  let count = 0;
-  const [inputfield, setinputfield] = useState([
+  let [inputfield, setinputfield] = useState([
     {
-      id:count++,
-      check: 'off',
       air: '',
       suray: '',
       pump: '',
     }
   ])
   
-  const handleOnClickEvent = () => {
+  const handleOnClickEvent = (e, index) => {
     let newfield = {
-      id:count++,
-      check: 'off',
-      air: '',
+      regular: '',
       suray: '',
       pump: '',
     }
@@ -30,8 +34,15 @@ function StatementForm() {
 
   const handleChangeEvent = (e, index) => {
     let newfield = [...inputfield];
-    newfield[index][e.target.name] = e.target.value
+    newfield[index][e.target.name] = e.target.value;
     console.log(inputfield);
+    setinputfield(newfield);
+  };
+
+  const handleChekcboxChangeEvent = (e, index) => {
+    let newfield = [...inputfield];
+    newfield[index][e.target.name] = (newfield[index][e.target.name] === true? false : true);
+    console.log(newfield);
     setinputfield(newfield);
   };
 
@@ -46,20 +57,21 @@ function StatementForm() {
       <div className='State-form grid grid-cols-1 gap-y-2'>
         {inputfield.map((form, index) => {
             return (
-              <div key={index} className=" grid grid-cols-7" >
+              <div key={index} className=" grid grid-cols-10" >
+              <span> {index}: </span>
                 <span className=' basis-1 '>レポートに載せますか？</span>
                 <input type="checkbox"
-                  name="check"
+                  name={'check' + index}
                   className=' basis-1 '
-                  onChange={e => handleChangeEvent(e, index)}
+                  onChange={e => handleChekcboxChangeEvent(e, index)}
                 />
                 <span className=' basis-1 ' >条件データ:</span>
                 <input
-                  name='air'
+                  name='regular'
                   className=' border-2 border-black '
                   placeholder='air'
                   onChange={e => handleChangeEvent(e, index)}
-                  value={form.air}
+                  value={form.regular}
                 />
                 <input
                   name='suray'
@@ -101,6 +113,7 @@ const Command = () => {
 function Main(){
 
   const navigate = useNavigate();
+  let [customerName, setcustomerName] = useState('')
 
   const toJson = async (res) => {
     const json = await res.json();
@@ -108,27 +121,43 @@ function Main(){
     return json;
   }
 
-  const handleAPIEvent = async () => {
-    const res = await fetch('http://localhost:8000/report/react/', {
-      method: 'GET',
-    })
-    return await toJson(res);
+  useEffect(() => {
+    const fetchData = async () => {
+      let res = await fetch('http://localhost:8000/report/react/', {
+        method: 'GET',
+      })
+      res = await toJson(res);
+      console.log(res['customer_name']);
+      setcustomerName(res['customer_name']);
+    }
+    fetchData();
+  }, [])
+
+  const PostData = () => {
+    try {
+      //const Data = axios.post('http://localhost:8000/report/react/', )
+      navigate('/reportForm')
+    } catch (error) {
+      alert("Error");
+    }
   }
 
   return(
     <div >
-      <form action="" method="post">
+      <CustomerName name={customerName}></CustomerName>
+      <form action="http://localhost:8000/report/react/" method="post">
         <StatementForm></StatementForm>
         <FileUploadUI></FileUploadUI>
         <Command></Command>
-        <button onClick={() => navigate('/reportForm')}>レポート作成</button>
+        <input type='submit' value="レポート作成" onSubmit={PostData}></input>
+        <br />
       </form>
-      <button onClick={handleAPIEvent} >Here</button>
     </div>
   );
 }
 
 function App() {
+
   useEffect(() => {
     document.title = "report"
   }, []);
