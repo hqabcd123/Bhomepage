@@ -73,7 +73,7 @@ function StatementForm() {
           return response.data;
         });
     } catch (error) {
-      alert(error);
+      //alert(error);
     }
   }
   let [CommandData, setCommandData] = useState('');

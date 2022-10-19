@@ -32,36 +32,13 @@ def react_reportform(request):
     
     elif request.method == 'POST':
         try:
-            klist = [
-                'statment',
-                'img',
-                'command',
-            ]
-            statement_list = [
-                'regular',
-                'suray',
-                'pump',
-            ]
             print(' data: {} '.format(request.POST))
             data = request.POST
             case = Btest_case.objects.get(
                 customer_name = cs_name,
             )
-            for k, v in data.items():
-                print(k)
-                data = [temp for temp in klist if k in klist]
-                
-                
-                # test_data.objects.get_or_create(
-                #     Case = case,
-                #     No = i,
-                #     Regular_P = data.getlist('regular')[i],
-                #     Suray = data.getlist('suray')[i],
-                #     Pump_P = data.getlist('pump')[i],
-                #     is_show = True if data.get('check{}'.format(i)) == 'on' else False
-                # )
-                pass
+            reduce_Post_to_Json(data)
             return JsonResponse(data)
         except Exception as e:
-            print('error')
+            error('error')
             print(e)
