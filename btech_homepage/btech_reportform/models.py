@@ -1,4 +1,3 @@
-from distutils.cmd import Command
 from enum import unique
 import random
 import string
