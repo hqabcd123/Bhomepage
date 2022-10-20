@@ -39,6 +39,10 @@ def react_reportform(request):
                 customer_name = cs_name,
             )
             reduce_Post_to_Json(data)
+            test_data(
+                Case = case,
+                
+            )
             return JsonResponse(data)
         except Exception as e:
             error('error')

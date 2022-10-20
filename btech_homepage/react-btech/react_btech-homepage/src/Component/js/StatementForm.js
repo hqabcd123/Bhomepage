@@ -51,7 +51,7 @@ function StatementForm() {
         const body = {
           statement: inputfield,
           command: CommandData,
-          img: file,
+          img: fileLink,
         }
         const baseUrl = 'http://localhost:8000/report/react/'
   
