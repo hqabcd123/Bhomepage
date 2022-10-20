@@ -32,6 +32,7 @@ def react_reportform(request):
     
     elif request.method == 'POST':
         try:
+            print(request)
             print(' data: {} '.format(request.POST))
             data = request.POST
             case = Btest_case.objects.get(
