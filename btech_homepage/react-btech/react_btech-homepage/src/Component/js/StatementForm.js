@@ -84,13 +84,18 @@ function StatementForm() {
     const handleIMGChangeEvent = async(e) => {
         if (!e.target.files) return;
         setfile(file => ([...file, ...e.target.files]));
+
+        let temp = []
         const fs = Array.from(e.target.files);
         fs.map((filel) => {
-            console.log(filel);
-            setfileLink([...fileLink, URL.createObjectURL(filel)]);
-            console.log(fileLink);
+            temp.push(URL.createObjectURL(filel));
             return null;
         })
+        let newfileLink = [...fileLink];
+        temp.map(data => {
+          newfileLink.push(data);
+        })
+        setfileLink(newfileLink);
         console.log(file);
         console.log(fileLink);
     };
@@ -155,11 +160,11 @@ function StatementForm() {
                 />
             </div>
             <div className=" grid grid-cols-4 gap-4 ">
-                {file.map((image, index) => {
+                {fileLink.map((image, index) => {
                     return (
                         <div id="image" key={index}>
-                            <p>{URL.createObjectURL(image)}</p>
-                            <img className=" object-cover h-48 " src={URL.createObjectURL(image)} alt=""/>
+                            <p>{image}</p>
+                            <img className=" object-cover h-48 " src={image} alt=""/>
                         </div>
                     );
                 })}
