@@ -80,7 +80,7 @@ function StatementForm() {
     //     data.append("images[]", image);
     //     return null;
     // });
-  
+    const [len, setLen] = useState(null);4
     const handleIMGChangeEvent = async(e) => {
         if (!e.target.files) return;
 
@@ -95,12 +95,18 @@ function StatementForm() {
           newfileLink.push(data);
           return null;
         })
+        let newIMGCommant = [...IMGCommant];
+        for (let i = 0; i < temp.length; i++) {
+          setCommandData([newIMGCommant, '']);
+        }
         setfileLink(newfileLink);
     };
 
     const [IMGCommant, setIMGCommant] = useState([])
     const handleIMGCommantEvent = (e, index) => {
-      //
+      let newFileCommant = [...IMGCommant]
+      newFileCommant[e.target.name][index] = e.target.value;
+      setIMGCommant(newFileCommant);
     }
   
   
