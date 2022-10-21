@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import '../css/ImageUpload.css';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -51,9 +51,10 @@ function StatementForm() {
         const body = {
           statement: inputfield,
           command: CommandData,
-          img: fileLink,
+          img: [...fileLink],
         }
         const baseUrl = 'http://localhost:8000/report/react/'
+        console.log(body);
   
         await axios.post(baseUrl, body, {headers: {
           'Content-Type': 'multipart/form-data',
@@ -94,10 +95,9 @@ function StatementForm() {
         let newfileLink = [...fileLink];
         temp.map(data => {
           newfileLink.push(data);
+          return null;
         })
         setfileLink(newfileLink);
-        console.log(file);
-        console.log(fileLink);
     };
   
   
@@ -163,8 +163,9 @@ function StatementForm() {
                 {fileLink.map((image, index) => {
                     return (
                         <div id="image" key={index}>
-                            <p>{image}</p>
-                            <img className=" object-cover h-48 " src={image} alt=""/>
+                          <textarea className=" border-2 border-soild border-black "></textarea>
+                          <p>{image}</p>
+                          <img className=" object-cover h-48 " src={image} alt=""/>
                         </div>
                     );
                 })}

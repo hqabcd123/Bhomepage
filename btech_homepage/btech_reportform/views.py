@@ -34,16 +34,19 @@ def react_reportform(request):
         try:
             print(request)
             print(' data: {} '.format(request.POST))
-            data = request.POST
+            datas = request.POST
             case = Btest_case.objects.get(
                 customer_name = cs_name,
             )
-            reduce_Post_to_Json(data)
-            test_data(
-                Case = case,
+            datas = Statement(datas).StatementSort
+            # for data in datas:
                 
-            )
-            return JsonResponse(data)
+            #     pass
+            # test_data(
+            #     Case = case,
+                
+            # )
+            return JsonResponse(datas)
         except Exception as e:
             error('error')
             print(e)
