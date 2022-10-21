@@ -73,7 +73,6 @@ function StatementForm() {
     const handleCommandChangeEvent = (e) => {
       setCommandData(e.target.value);
     }
-    const [file, setfile] = useState([]);
     const [fileLink, setfileLink] = useState([]);
   
     // const data = new FormData();
@@ -84,7 +83,6 @@ function StatementForm() {
   
     const handleIMGChangeEvent = async(e) => {
         if (!e.target.files) return;
-        setfile(file => ([...file, ...e.target.files]));
 
         let temp = []
         const fs = Array.from(e.target.files);
@@ -99,6 +97,11 @@ function StatementForm() {
         })
         setfileLink(newfileLink);
     };
+
+    const [IMGCommant, setIMGCommant] = useState([])
+    const handleIMGCommantEvent = (e, index) => {
+      //
+    }
   
   
     return (
@@ -163,7 +166,10 @@ function StatementForm() {
                 {fileLink.map((image, index) => {
                     return (
                         <div id="image" key={index}>
-                          <textarea className=" border-2 border-soild border-black "></textarea>
+                          <textarea 
+                            className=" border-2 border-soild border-black "
+                            onChange={e => handleIMGCommantEvent(e, index)}
+                          ></textarea>
                           <p>{image}</p>
                           <img className=" object-cover h-48 " src={image} alt=""/>
                         </div>
