@@ -39,7 +39,6 @@ function Main(){
     <div >
       <CustomerName name={customerName}></CustomerName>
       <StatementForm></StatementForm>
-      <Link to='/reportForm'>awarwd</Link>
       <br />
     </div>
   );
